@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
     else
       f = Article.all
     end
-    @articles = f.paginate(:page => params[:page], :per_page => 5)
+    @articles = f.paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /articles/1
@@ -84,6 +84,7 @@ class ArticlesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(params[:id])
+      @user = User.find(@article.user_id) 
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

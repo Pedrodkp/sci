@@ -15,6 +15,8 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th>Likes</th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -22,6 +24,8 @@
     <% @articles.each do |article| %>
       <tr>
         <td><%= link_to article.title, article_path(article) %></td>
+        <td><%= article.created_at.strftime("%m/%b/%Y") %></td>
+        <td><%= ArticleLike.where(['article_id = ?', article.id]).count %></td>
         <td>
           <%= link_to 'Ver', article_path(article), :class => 'btn btn-xs btn-success' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
