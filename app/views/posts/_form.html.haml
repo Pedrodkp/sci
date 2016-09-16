@@ -1,4 +1,26 @@
-= simple_form_for @post do |f|
-  = f.input :title
-  = f.input :content
-  = f.submit
+= form_for @post, :html => { :class => "form-horizontal article" }  do |f|
+  = if @post.errors.any?
+    #error_expl{class: "panel panel-danger"}
+      .panel-heading
+        %h3{class: "panel-title"}
+          = pluralize(@post.errors.count, t(:erros_prohibited))
+      .panel-body
+        .ul
+          = @post.errors.full_messages.each do |msg|
+            %li 
+              = msg
+
+  .form-group    
+    .col-lg-12
+      = f.label "Título", :class => 'col-lg'
+      = f.text_field :title, :class => 'form-control'
+
+  .form-group    
+    .col-lg-12
+      = f.label "Corpo", :class => 'col-lg'
+      = f.text_area :content, :class => 'form-control'
+
+  .form-group
+    .col-lg-10
+      = f.submit nil, :class => 'btn btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), posts_path, :class => 'btn btn-default'

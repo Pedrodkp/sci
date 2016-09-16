@@ -5,10 +5,10 @@
 
 <%= form_tag(articles_path, :method => :get) do %>
   <div class='col-sm-4'>
-    <%= text_field_tag 'search', nil, placeholder: 'Pesquisa do Artigo', :class => 'form-control' %>
+    <%= text_field_tag 'search', nil, placeholder: 'Pesquisa nos Artigos', :class => 'form-control' %>
   </div>
   <%= submit_tag "Pesquisar", :class => 'btn btn-default' %>
-  <%= link_to t('.new', :default => t("helpers.links.new")), new_article_path, :class => 'btn btn-primary' %>  
+  <%= link_to "Criar Artigo", new_article_path, :class => 'btn btn-primary' %>  
 <% end %>
 <br/>
 <table class="table table-striped">
@@ -41,4 +41,4 @@
   </tbody>
 </table>
 
-<%= will_paginate @articles %>
+<%= will_paginate @articles, renderer: BootstrapPagination::Rails %>

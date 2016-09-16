@@ -2,7 +2,12 @@ class PostsController < ApplicationController
 	before_action :find_post, only: [:show, :edit, :update, :destroy]
 
 	def index
-	  @posts = Post.all.order("created_at DESC")
+      if params[:search]
+        f = Post.search(params[:search]).order("created_at DESC")
+      else
+        f = Post.all.order("created_at DESC")
+      end
+      @posts = f.paginate(:page => params[:page], :per_page => 10)	  
 	end
 
 	def show
@@ -15,28 +20,38 @@ class PostsController < ApplicationController
 
 	def create
 	  @post = current_user.posts.build(post_params)
-
-	  if @post.save
-	  	redirect_to @post
-	  else
-	  	render 'new'
-	  end
+      respond_to do |format|
+        if @post.save
+          format.html { redirect_to @post, notice: @post.title+t(:was_created) }
+          format.json { render :show, status: :created, location: @post }
+        else
+          format.html { render :new }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
+      end
 	end
 
 	def edit
 	end
 
 	def update
-	  if @post.update(post_params)
-	  	redirect_to @post
-	  else
-	  	render 'edit'
-	  end
+      respond_to do |format|
+        if @post.update(post_params)
+          format.html { redirect_to @post, notice: @post.title+t(:was_updated) }
+          format.json { render :show, status: :ok, location: @post }
+        else
+          format.html { render :edit }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
+      end	  
 	end
 
 	def destroy
 	  @post.destroy
-	  redirect_to root_path
+      respond_to do |format|
+        format.html { redirect_to posts_url, notice: @post.title+t(:was_destroyed) }
+        format.json { head :no_content }
+      end
 	end
 
 	private

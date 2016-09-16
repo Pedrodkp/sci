@@ -1,9 +1,33 @@
-- @posts.each do |post|
-  %h2= link_to post.title, post
-  %p 
-    Publicado há 
-    = time_ago_in_words(post.created_at)
-    por 
-    = post.user.email
+.page-header
+  %h1 
+    Fórum
 
-= link_to "Novo Post", new_post_path
+= form_tag(posts_path, :method => :get) do
+  .col-sm-4
+    = text_field_tag 'search', nil, placeholder: 'Pesquisa no Fórum', :class => 'form-control'
+  = submit_tag "Pesquisar", :class => 'btn btn-default'
+  = link_to "Novo Tópico", new_post_path, :class => 'btn btn-primary'
+
+%br
+
+%table{:class => "table table-striped"}
+  %thead
+    %tr
+      %th
+        Tópicos
+      %th
+        Ações        
+  %tbody
+    - @posts.each do |post|
+      %tr
+        %td
+          %h3= link_to post.title, post
+          %p 
+            Publicado há 
+            = time_ago_in_words(post.created_at)
+            por 
+            = post.user.email
+        %td
+          = link_to 'Ver', post_path(post), :class => 'btn btn-xs btn-success'
+
+= will_paginate @posts, renderer: BootstrapPagination::Rails

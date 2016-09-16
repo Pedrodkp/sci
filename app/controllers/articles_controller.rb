@@ -3,33 +3,25 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy, :like]
 
 
-  # GET /articles
-  # GET /articles.json
   def index
     if params[:search]
       f = Article.search(params[:search])
     else
       f = Article.all
     end
-    @articles = f.paginate(:page => params[:page], :per_page => 20)
+    @articles = f.paginate(:page => params[:page], :per_page => 10)
   end
 
-  # GET /articles/1
-  # GET /articles/1.json
   def show
   end
 
-  # GET /articles/new
   def new
     @article = Article.new    
   end
 
-  # GET /articles/1/edit
   def edit
   end
 
-  # POST /articles
-  # POST /articles.json
   def create
     @article = Article.new(article_params)
     @article.user_id = current_user.id 
@@ -44,8 +36,6 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /articles/1
-  # PATCH/PUT /articles/1.json
   def update
     respond_to do |format|
       if @article.update(article_params)
@@ -58,8 +48,6 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # DELETE /articles/1
-  # DELETE /articles/1.json
   def destroy
     @article.destroy
     respond_to do |format|
