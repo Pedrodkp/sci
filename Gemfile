@@ -19,7 +19,7 @@ gem 'ckeditor'
 gem 'paperclip'
 gem 'cocoon'
 gem 'paperclip_database', '~> 2.3', '>= 2.3.1'
-
+gem 'haml', '~> 4.0.5'
 group :development do
   gem 'better_errors'
   gem 'quiet_assets'
