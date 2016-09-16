@@ -1,5 +1,6 @@
 <% if user_signed_in? %>
   <li><%= link_to t('.title', :default => Article.model_name.human.pluralize.titleize), articles_path %></li>
+  <li><%= link_to 'Fórum', posts_path %></li>
   <li><%= link_to t('edit_account'), edit_user_registration_path %></li>
   <li><%= link_to t('sign_out'), destroy_user_session_path, :method=>'delete' %></li>
 <% else %>
