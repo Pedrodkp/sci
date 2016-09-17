@@ -27,7 +27,7 @@
     <fieldset>
       <p>Você precisa entrar com sua senha atual para confirmar as alterações.</p>
       <div class="form-group">
-        <p>Senha atual:</p>
+        <%= f.label :current_password, "Senha atual:" %>
         <%= f.password_field :current_password, class: 'form-control' %>
       </div>
     </fieldset>

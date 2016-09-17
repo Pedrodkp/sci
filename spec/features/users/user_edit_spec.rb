@@ -20,8 +20,8 @@ feature 'User edit', :devise do
     login_as(user, :scope => :user)
     visit edit_user_registration_path(user)
     fill_in 'Email', :with => 'newemail@example.com'
-    fill_in 'Current password', :with => user.password
-    click_button 'Update'
+    fill_in 'Senha atual:', :with => user.password
+    click_button 'Atualizar'
     txts = [I18n.t( 'devise.registrations.updated'), I18n.t( 'devise.registrations.update_needs_confirmation')]
     expect(page).to have_content(/.*#{txts[0]}.*|.*#{txts[1]}.*/)
   end
@@ -30,12 +30,12 @@ feature 'User edit', :devise do
   #   Given I am signed in
   #   When I try to edit another user's profile
   #   Then I see my own 'edit profile' page
-  scenario "user cannot cannot edit another user's profile", :me do
+  scenario "user cannot edit another user's profile", :me do
     me = FactoryGirl.create(:user)
     other = FactoryGirl.create(:user, email: 'other@example.com')
     login_as(me, :scope => :user)
     visit edit_user_registration_path(other)
-    expect(page).to have_content 'Edit User'
+    expect(page).to have_content 'Editar usuário'
     expect(page).to have_field('Email', with: me.email)
   end
 
