@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   has_many :articles
   has_many :articlelikes
   has_many :posts
+  has_many :comments  
 end

@@ -1,0 +1,10 @@
+= form_for [@post, @post.comments.build] do |f|
+
+  .form-group    
+    .col-lg-4
+      = f.label "Comentar", :class => 'col-lg'
+      = f.text_field :comment, :class => 'form-control'    
+      %br      
+      = f.submit "Comentar", :class => 'btn btn-xs btn-primary'
+
+%br      

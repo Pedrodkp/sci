@@ -1,0 +1,10 @@
+= simple_form_for([@post, @comment]) do |f|
+
+  .form-group    
+    .col-lg-4
+      = f.label "Editar comentário", :class => 'col-lg'
+      = f.text_field :comment, :class => 'form-control'    
+      %br      
+      = f.submit "Salvar", :class => 'btn btn-xs btn-primary'
+
+%br      	

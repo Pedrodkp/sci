@@ -5,3 +5,11 @@
   = link_to "Voltar", posts_path, :class => 'btn btn-default'
   = link_to "Editar", edit_post_path(@post), :class => 'btn btn-default'
   = link_to "Deletar", post_path(@post), method: :delete, data: {confirm: "Você tem certeza?"}, :class => 'btn btn-danger'
+
+  #comments 
+    %br
+    %b
+      = @post.comments.count
+    Comentário(s)
+    = render @post.comments
+    = render "comments/form"

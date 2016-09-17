@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916183721) do
+ActiveRecord::Schema.define(version: 20160916220410) do
 
   create_table "article_likes", force: :cascade do |t|
     t.integer  "article_id", limit: 4
@@ -70,6 +70,17 @@ ActiveRecord::Schema.define(version: 20160916183721) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "comment",    limit: 65535
+    t.integer  "post_id",    limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "flaggings", force: :cascade do |t|
     t.string   "flaggable_type", limit: 255
@@ -138,6 +149,8 @@ ActiveRecord::Schema.define(version: 20160916183721) do
   add_foreign_key "article_taxonomies", "articles"
   add_foreign_key "article_taxonomies", "taxonomies"
   add_foreign_key "articles", "users"
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
   add_foreign_key "relationships", "articles"
   add_foreign_key "relationships", "taxonomies"
   add_foreign_key "taxonomies", "users"
