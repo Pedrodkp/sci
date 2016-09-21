@@ -8,8 +8,8 @@ class Article < ActiveRecord::Base
  	    	    or articles.body like :search_by_text 
  	    	    or taxonomies.code like :search_by_text
  	    	   ) 
- 	    	   and (articles.created_at >= STR_TO_DATE(:search_by_date_ini,'%Y-%m-%d') or :search_by_date_ini = '%%')
- 	    	   and (articles.created_at <= STR_TO_DATE(:search_by_date_fim,'%Y-%m-%d') or :search_by_date_fim = '%%')
+ 	    	   and (DATE(articles.created_at) >= STR_TO_DATE(:search_by_date_ini,'%Y-%m-%d') or :search_by_date_ini = '')
+ 	    	   and (DATE(articles.created_at) <= STR_TO_DATE(:search_by_date_fim,'%Y-%m-%d') or :search_by_date_fim = '')
  	    	   ",search_by_text: "%#{search_by_text}%",search_by_date_ini: "#{search_by_date_ini}",search_by_date_fim: "#{search_by_date_fim}").
  	      group(:id, :title, :body, :created_at, :updated_at, :user_id)
  	end 	
