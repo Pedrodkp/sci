@@ -4,8 +4,8 @@ class ArticlesController < ApplicationController
 
 
   def index
-    if params[:search]
-      f = Article.search(params[:search])
+    if params[:search_by_text] or params[:search_by_date_ini] or params[:search_by_date_fim]
+      f = Article.search(params[:search_by_text],params[:search_by_date_ini],params[:search_by_date_fim])
     else
       f = Article.all
     end
