@@ -15,12 +15,14 @@ class Article < ActiveRecord::Base
  	end 	
 
  	belongs_to :user
+
  	has_many :relationships, :dependent => :delete_all
  	has_many :taxonomies, :through => :relationships, :dependent => :delete_all
+
  	has_attached_file :attachments, :storage => :database
  	do_not_validate_attachment_file_type :attachments
- 	#has_and_belongs_to_many :taxonomies
- 	has_many :articlelikes
 
- 	accepts_nested_attributes_for :relationships, reject_if: :all_blank, allow_destroy: true
+ 	has_many :articlelikes, :class_name => 'ArticleLike'
+
+ 	accepts_nested_attributes_for :relationships, :articlelikes, reject_if: :all_blank, allow_destroy: true
 end
