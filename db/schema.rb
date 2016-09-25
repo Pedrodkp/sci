@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916220410) do
+ActiveRecord::Schema.define(version: 20160924030640) do
 
   create_table "article_likes", force: :cascade do |t|
     t.integer  "article_id", limit: 4
     t.integer  "user_id",    limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.text     "comment",    limit: 65535
+    t.text     "like_level", limit: 65535
   end
 
   add_index "article_likes", ["article_id", "user_id"], name: "index_article_likes_on_article_id_and_user_id", unique: true, using: :btree
