@@ -7,12 +7,12 @@
   <div class="row">
     <div class='col-sm-4'>
       <%= text_field_tag 'search_by_text', nil, placeholder: 'Pesquisa nos Artigos', :class => 'form-control' %>
-      <a href="#filtro_complexo" class="btn btn-xs btn-default" onclick="$('#filtro_complexo').toggle();">Busca avançada</a>
+      <a href="#filtro_complexo" class="btn btn-xs btn-default" onclick="$('#filtro_complexo').toggle(); return false;">Busca avançada</a>
     </div>
     <%= submit_tag "Pesquisar", :class => 'btn btn-default' %>
     <%= link_to "Criar Artigo", new_article_path, :class => 'btn btn-primary' %>    
   </div>
-  </br>
+  <br/>
 
   <div id="filtro_complexo" class="row" style="display:none">
     <div class='col-sm-2'>  
