@@ -4,6 +4,7 @@
 </div>
 
 <dl>
+  <dd><%= @article.body.html_safe %></dd> 
   <dd>
     <strong>Tags: </strong>
     <% @article.taxonomies.each do |taxonomies| %>
@@ -11,9 +12,8 @@
     <% end %>
   </dd>
   <dd><strong><%= model_class.human_attribute_name(:created_at) %>: </strong><%=l @article.created_at %></dd>
-  <dd><strong><%= model_class.human_attribute_name(:user) %>: </strong><%= @user.email %></dd>
+  <dd><strong><%= model_class.human_attribute_name(:user) %>: </strong><%= @article.user.email %></dd>
   <dd><br/></dd>
-  <dd><%= @article.body.html_safe %></dd> 
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")), articles_path, :class => 'btn btn-default'  %>
@@ -23,4 +23,25 @@
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
-<%= toggle_like_button(@article) %>              
+
+</br>
+</br>
+
+<% if @article.articlelikes.first != nil %>
+
+  Você considera este artigo: <b><%= @article.articlelikes.first.like_level %></b>. 
+  <%= link_to "Apagar opinião", article_article_like_path(@article,@article.articlelikes.first.id),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-xs btn-danger' %>
+  </br>
+  <% if @article.articlelikes.first.comment != '' %>  
+    Seu comentário: <%= @article.articlelikes.first.comment %>.  
+  <% end %>
+  </br>
+
+<% else %>
+
+  <%= render 'article_likes/form' %>
+
+<% end %>             

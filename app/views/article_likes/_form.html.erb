@@ -1,0 +1,14 @@
+  <%= form_for [@article, @article.articlelikes.build] do |f| %>    
+    <div class="form-group">    
+      <div class="col-lg-4 row">
+        <%= f.label "article_like[like_level]", 'Gostou da leitura? Como você classifica este artigo?', :class => 'col-lg' %>
+        <%= f.select_tag "article_like[like_level]", options_for_select(@LIKE_LEVELS), {:class => "form-control"} %>
+        <%= f.label :comment, 'Algum comentário ao autor da ultima revisão?', :class => 'col-lg' %>
+        <%= f.text_area :comment, :class => 'form-control' %>        
+        <center>
+          <br/>
+          <%= f.submit_tag "Opinar", :class => 'btn btn-success'%>
+        </center>
+      </div>      
+    </div>        
+  <% end %>

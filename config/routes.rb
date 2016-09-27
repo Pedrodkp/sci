@@ -3,9 +3,7 @@ Rails.application.routes.draw do
   resources :relationships
   resources :taxonomies
   resources :articles do
-  	member do
-  	  get 'like'
-  	end
+    resources :article_likes
   end
   root to: 'visitors#index'
   devise_for :users
