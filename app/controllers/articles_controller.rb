@@ -3,7 +3,15 @@ class ArticlesController < ApplicationController
 
   def index
     if params[:search_by_text] or params[:search_by_date_ini] or params[:search_by_date_fim]
-      f = Article.search(params[:search_by_text],params[:search_by_date_ini],params[:search_by_date_fim])
+      #f = Article.search(params[:search_by_text],params[:search_by_date_ini],params[:search_by_date_fim])
+      f = Article.select(:id, :title, :body, :created_at, :updated_at, :user_id).joins(:taxonomies)
+      f = f.where("(   articles.title like :search_by_text 
+                    or articles.body like :search_by_text 
+                    or taxonomies.code like :search_by_text
+                   )",search_by_text: "%#{params[:search_by_text]}%") if params[:search_by_text].present?
+      f = f.where("DATE(articles.created_at) >= STR_TO_DATE(:search_by_date_ini,'%Y-%m-%d')",search_by_date_ini: "#{params[:search_by_date_ini]}") if params[:search_by_date_ini].present?
+      f = f.where("DATE(articles.created_at) <= STR_TO_DATE(:search_by_date_fim,'%Y-%m-%d')",search_by_date_fim: "#{params[:search_by_date_fim]}") if params[:search_by_date_fim].present?
+      f = f.group(:id, :title, :body, :created_at, :updated_at, :user_id)
     else
       f = Article.all
     end
