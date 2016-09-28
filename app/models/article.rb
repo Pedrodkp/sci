@@ -3,15 +3,16 @@ class Article < ActiveRecord::Base
  	validates :body, presence: true
 
 	def self.search(search_by_text, search_by_date_ini, search_by_date_fim)
- 	  joins(:taxonomies).
- 	    where("(   articles.title like :search_by_text 
- 	    	    or articles.body like :search_by_text 
- 	    	    or taxonomies.code like :search_by_text
- 	    	   ) 
- 	    	   and (DATE(articles.created_at) >= STR_TO_DATE(:search_by_date_ini,'%Y-%m-%d') or :search_by_date_ini = '')
- 	    	   and (DATE(articles.created_at) <= STR_TO_DATE(:search_by_date_fim,'%Y-%m-%d') or :search_by_date_fim = '')
- 	    	   ",search_by_text: "%#{search_by_text}%",search_by_date_ini: "#{search_by_date_ini}",search_by_date_fim: "#{search_by_date_fim}").
- 	      group(:id, :title, :body, :created_at, :updated_at, :user_id)
+	  select(:id, :title, :body, :created_at, :updated_at, :user_id).
+   	    joins(:taxonomies).
+ 	      where("(   articles.title like :search_by_text 
+ 	      	      or articles.body like :search_by_text 
+ 	    	      or taxonomies.code like :search_by_text
+ 	    	     ) 
+ 	    	     and (DATE(articles.created_at) >= STR_TO_DATE(:search_by_date_ini,'%Y-%m-%d') or :search_by_date_ini = '')
+ 	    	     and (DATE(articles.created_at) <= STR_TO_DATE(:search_by_date_fim,'%Y-%m-%d') or :search_by_date_fim = '')
+ 	    	     ",search_by_text: "%#{search_by_text}%",search_by_date_ini: "#{search_by_date_ini}",search_by_date_fim: "#{search_by_date_fim}").
+ 	        group(:id, :title, :body, :created_at, :updated_at, :user_id)
  	end 	
 
  	belongs_to :user
