@@ -3,11 +3,21 @@ class ArticlesController < ApplicationController
 
   def index
     if params[:search_by_text] or params[:search_by_date_ini] or params[:search_by_date_fim]
-      f = Article.select(:id, :title, :body, :created_at, :updated_at, :user_id).joins(:taxonomies)
-      f = f.where([(['articles.title LIKE ? OR articles.body LIKE ? OR taxonomies.code LIKE ?'] * params[:search_by_text].split.length).join(' OR ')] + params[:search_by_text].split.map { |name| "%#{name}%" } * 3)
+      f = Article.select("articles.id, articles.title, articles.body, articles.created_at, articles.updated_at, articles.user_id")
+      f = f.joins(" LEFT OUTER JOIN relationships r ON r.article_id = articles.id LEFT OUTER JOIN taxonomies t ON t.id = r.taxonomy_id")
+      #Entendendo a linha abaixo:
+      #  1) ['articles.title LIKE ? OR articles.body LIKE ? OR t.code LIKE ?'] * ==> multiplique este texto N vezes
+      #  2) params[:search_by_text].split(';').length)                           ==> N é tamanho do array feito por split do paramatro por ;
+      #  3) .join(' OR ')]                                                       ==> .join(' OR ') cria no array gerado uma posição entre cada duas com o texto OR
+      #  4) +                                                                    ==> montou o SQL, repetindo quantos texto separados por ; vieram, agora começa os parametros
+      #  5) params[:search_by_text].split(';').map { |name| "%#{name}%" }        ==> faz o MAP dos textos separados por ; para usar como parametro do SQL gerado
+      #  6) * 3)                                                                 ==> multiplica cada Pos do MAP por 3 pois o SQL usa o mesmo texto para LIKE em 3 tabelas
+      #  7) if params[:search_by_text].present?                                  ==> só executa a linha se o parametro estiver com valor
+      f = f.where([(['articles.title LIKE ? OR articles.body LIKE ? OR t.code LIKE ?'] * params[:search_by_text].split(';').length).join(' OR ')] + 
+                  params[:search_by_text].split(';').map { |name| "%#{name}%" } * 3) if params[:search_by_text].present?
       f = f.where("DATE(articles.created_at) >= STR_TO_DATE(:search_by_date_ini,'%Y-%m-%d')",search_by_date_ini: "#{params[:search_by_date_ini]}") if params[:search_by_date_ini].present?
       f = f.where("DATE(articles.created_at) <= STR_TO_DATE(:search_by_date_fim,'%Y-%m-%d')",search_by_date_fim: "#{params[:search_by_date_fim]}") if params[:search_by_date_fim].present?
-      f = f.group(:id, :title, :body, :created_at, :updated_at, :user_id)
+      f = f.group("articles.id, articles.title, articles.body, articles.created_at, articles.updated_at, articles.user_id")
     else
       f = Article.all
     end
