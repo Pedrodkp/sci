@@ -41,9 +41,9 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th>Likes</th>
+      <th><%= sortable "title", "Título" %></th>
+      <th><%= sortable "created_at", "Criado em" %></th>
+      <th><%= sortable "likes", "Likes" %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -52,7 +52,7 @@
       <tr>
         <td><%= link_to article.title, article_path(article) %></td>
         <td><%= article.created_at.strftime("%d/%m/%Y") %></td>
-        <td><%= ArticleLike.where(['article_id = ?', article.id]).count %></td>
+        <td><%= article.likes %></td>
         <td>
           <%= link_to 'Ver', article_path(article), :class => 'btn btn-xs btn-success' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -67,5 +67,4 @@
     <% end %>
   </tbody>
 </table>
-
 <%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
