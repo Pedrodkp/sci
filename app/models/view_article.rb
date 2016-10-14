@@ -10,7 +10,8 @@ class ViewArticle < ActiveRecord::Base
     #  5) params[:search_by_text].split(';').map { |name| "%#{name}%" }        ==> faz o MAP dos textos separados por ; para usar como parametro do SQL gerado
     #  6) * 3)                                                                 ==> multiplica cada Pos do MAP por 3 pois o SQL usa o mesmo texto para LIKE em 3 tabelas
     #  7) if params[:search_by_text].present?                                  ==> só executa a linha se o parametro estiver com valor
-    f = f.where([(['view_articles.title LIKE ? OR view_articles.body LIKE ? OR t.code LIKE ?'] * search_by_text.split(';').length).join(' OR ')] + 
+    f = f.where([(['view_articles.title LIKE ? collate utf8_general_ci OR view_articles.body LIKE ? collate utf8_general_ci OR t.code LIKE ? collate utf8_general_ci'] * 
+                search_by_text.split(';').length).join(' OR ')] + 
                 search_by_text.split(';').map { |name| "%#{name}%" } * 3) if search_by_text.present?
     f = f.where("DATE(view_articles.created_at) >= STR_TO_DATE(:search_by_date_ini,'%Y-%m-%d')",search_by_date_ini: "#{search_by_date_ini}") if search_by_date_ini.present?
     f = f.where("DATE(view_articles.created_at) <= STR_TO_DATE(:search_by_date_fim,'%Y-%m-%d')",search_by_date_fim: "#{search_by_date_fim}") if search_by_date_fim.present?
