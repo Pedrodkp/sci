@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy, :like]
-  helper_method :sort_column, :sort_direction
+  before_action :authenticate_user!
+  helper_method :sort_column, :sort_direction  
 
   def index
     @articles = ViewArticle.search(params[:search_by_text],

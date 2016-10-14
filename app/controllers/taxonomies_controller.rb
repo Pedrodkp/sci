@@ -1,5 +1,6 @@
 class TaxonomiesController < ApplicationController
   before_action :set_taxonomy, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!  
 
   # GET /taxonomies
   # GET /taxonomies.json

@@ -1,5 +1,6 @@
 class ArticleLikesController < ApplicationController
   before_action :find_article
+  before_action :authenticate_user!  
 
   def create   
     if (article_likes_params['like_level'] == 'Ruim' or article_likes_params['like_level'] == 'Péssimo') and 

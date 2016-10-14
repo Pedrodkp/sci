@@ -46,21 +46,24 @@
         <p>
             <%= form_tag(articles_path, :method => :get) do %>
               <%= link_to "Criar Artigo +".html_safe, new_article_path, :class => 'btn btn-default btn-lg' %>  
-              <%= text_field_tag 'search', nil, class: "btn btn-default btn-lg", placeholder: 'Digite sua dúvida' %>
+              <%= text_field_tag 'search_by_text', nil, class: "btn btn-default btn-lg", placeholder: 'Palavras chaves' %>
               <%= submit_tag "Buscar &raquo;".html_safe, class: "btn btn-default btn-lg" %>
             <% end %>        
         </p>
         <hr/>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <h2><%= @articles.count %></h2>artigos no sistema.
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <h2><%= @articles.where(user_id: current_user.id).count %></h2>artigos que criei.
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <h2><%= @article_likes.where(user_id: current_user.id).count %></h2>artigos que me ajudaram.
             </div>
+            <div class="col-sm-3">
+                <h2><%= @posts.count %></h2>tópicos de fórum.
+            </div>            
         </div>
         <hr/>
         <div class="panel panel-danger">

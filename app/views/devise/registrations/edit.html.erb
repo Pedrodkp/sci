@@ -10,7 +10,7 @@
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <div>Aguardando a confirmação do e-mail: <%= resource.unconfirmed_email %></div>
       <% end %>
     </div>
     <fieldset>

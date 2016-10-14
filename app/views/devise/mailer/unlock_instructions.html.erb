@@ -1,0 +1,6 @@
+<p><b>SCI - Sistema de Comunicação Inteligente</b></p>
+</br>
+<p>Olá <%= @resource.email %></p>
+<p>Sua conta foi travada devido ao número excessivo de tentativas.</p>
+<p>Use o link abaixo para desbloquear a sua conta:</p>
+<p><%= link_to 'Desbloquear minha conta', unlock_url(@resource, unlock_token: @token) %></p>

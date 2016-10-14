@@ -1,6 +1,7 @@
 class RelationshipsController < ApplicationController
   before_action :set_relationship, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  
   # GET /relationships
   # GET /relationships.json
   def index
