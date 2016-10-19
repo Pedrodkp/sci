@@ -99,20 +99,6 @@ ActiveRecord::Schema.define(version: 20161014004850) do
   add_index "flaggings", ["flaggable_type", "flaggable_id"], name: "index_flaggings_on_flaggable_type_and_flaggable_id", using: :btree
   add_index "flaggings", ["flagger_type", "flagger_id", "flaggable_type", "flaggable_id"], name: "access_flaggings", using: :btree
 
-  create_table "makes", force: :cascade do |t|
-    t.string   "name",         limit: 255
-    t.integer  "webmotors_id", limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
-  create_table "models", force: :cascade do |t|
-    t.integer  "make_id",    limit: 4
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
   create_table "posts", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.text     "content",    limit: 65535
@@ -165,16 +151,6 @@ ActiveRecord::Schema.define(version: 20161014004850) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "view_articles", id: false, force: :cascade do |t|
-    t.integer  "id",         limit: 4,          default: 0, null: false
-    t.string   "title",      limit: 255
-    t.text     "body",       limit: 4294967295
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.integer  "user_id",    limit: 4
-    t.integer  "likes",      limit: 8
-  end
-
-  create_table "vw_article", id: false, force: :cascade do |t|
     t.integer  "id",         limit: 4,          default: 0, null: false
     t.string   "title",      limit: 255
     t.text     "body",       limit: 4294967295
