@@ -23,6 +23,9 @@
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+<% if @article.articlehistories.count > 0 %>
+  <%= link_to 'Histórico', article_article_histories_path(@article), :class => 'btn btn-primary'  %>
+<% end %>
 
 </br>
 </br>
@@ -41,7 +44,5 @@
   </br>
 
 <% else %>
-
   <%= render 'article_likes/form' %>
-
-<% end %>             
+<% end %>

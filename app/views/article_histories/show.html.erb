@@ -1,0 +1,17 @@
+<%- model_class = Article -%>
+<div class="page-header">
+  <h1>Histórico do Artigo</h1>
+</div>
+<h4><%= 'Título: ' + @articlehistory.title %></h4>
+<h4><%= 'De: ' + @articlehistory.created_at.strftime("%d/%m/%Y") %></h4>
+</br>
+
+<dl>
+  <dd><%= @articlehistory.body.html_safe %></dd> 
+  <dd><%= @articlehistory.taxonomies %></dd> 
+  <dd><strong><%= model_class.human_attribute_name(:created_at) %>: </strong><%=l @articlehistory.created_at %></dd>
+  <dd><strong><%= model_class.human_attribute_name(:user) %>: </strong><%= @articlehistory.user.email %></dd>
+  <dd><br/></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")), article_article_histories_path(@articlehistory.article_id), :class => 'btn btn-default'  %>

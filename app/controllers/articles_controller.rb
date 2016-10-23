@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy, :like]
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   helper_method :sort_column, :sort_direction  
 
@@ -37,6 +37,18 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    @article_history            = ArticleHistory.new
+    @article_history.title      = @article.title
+    @article_history.body       = @article.body
+    @article_history.article_id = @article.id
+    @article_history.user_id    = @article.user_id
+    @article_history_taxonomies = ''
+    @article.taxonomies.each do |article_taxonomies|
+      @article_history_taxonomies = @article_history_taxonomies + '#' + article_taxonomies.code + ' '
+    end
+    @article_history.taxonomies = @article_history_taxonomies
+    @article_history.save
+
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to @article, notice: @article.title+t(:was_updated) }
@@ -57,13 +69,11 @@ class ArticlesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(params[:id])
       @LIKE_LEVELS = ['Ótimo','Bom','Razoavel','Ruim','Péssimo']
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params.require(:article).permit(:title, :body, :attachments,
                                       :relationships_attributes => [:id, :article_id, :taxonomy_id, :_destroy, 

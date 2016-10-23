@@ -1,0 +1,13 @@
+class CreateArticleHistories < ActiveRecord::Migration
+  def change
+    create_table :article_histories do |t|
+      t.string :title
+      t.text :body
+      t.references :user, index: true, foreign_key: true
+      t.string :taxonomies
+      t.references :article, index: true, foreign_key: true
+
+      t.timestamps null: false
+    end
+  end
+end

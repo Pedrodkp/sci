@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
+  get 'article_histories/index'
+
   mount Ckeditor::Engine => '/ckeditor'
-  resources :relationships
-  resources :taxonomies
-  resources :articles do
-    resources :article_likes
-  end
   root to: 'visitors#index'
   devise_for :users
   resources :users
+  
+  resources :articles do
+    resources :article_likes
+    resources :article_histories
+    resources :relationships
+    resources :taxonomies    
+  end
+  
   resources :posts do
-      resources :comments
+    resources :comments
   end
 end

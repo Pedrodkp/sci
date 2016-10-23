@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161014004850) do
+ActiveRecord::Schema.define(version: 20161022223200) do
+
+  create_table "article_histories", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.text     "body",       limit: 65535
+    t.integer  "user_id",    limit: 4
+    t.string   "taxonomies", limit: 255
+    t.integer  "article_id", limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "article_histories", ["article_id"], name: "index_article_histories_on_article_id", using: :btree
+  add_index "article_histories", ["user_id"], name: "index_article_histories_on_user_id", using: :btree
 
   create_table "article_likes", force: :cascade do |t|
     t.integer  "article_id", limit: 4
@@ -160,6 +173,8 @@ ActiveRecord::Schema.define(version: 20161014004850) do
     t.integer  "likes",      limit: 8
   end
 
+  add_foreign_key "article_histories", "articles"
+  add_foreign_key "article_histories", "users"
   add_foreign_key "article_likes", "articles"
   add_foreign_key "article_likes", "users"
   add_foreign_key "article_taxonomies", "articles"

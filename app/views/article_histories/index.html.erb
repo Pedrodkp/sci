@@ -1,0 +1,27 @@
+<%- model_class = Article -%>
+<div class="page-header">
+  <h1>Histórico do Artigo</h1>
+</div>
+<h4><%= 'Título: ' + @article.title %></h4>
+</br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= sortable "name", "Alterado por" %></th>
+      <th><%= sortable "created_at", "Alterado em" %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articlehistories.each do |articlehistory| %>
+      <tr>
+        <td><%= link_to articlehistory.name, article_article_history_path(articlehistory.article_id, articlehistory.id) %></td>
+        <td><%= articlehistory.created_at.strftime("%d/%m/%Y") %></td>
+        <td>
+          <%= link_to 'Ver', article_article_history_path(articlehistory.article_id, articlehistory.id), :class => 'btn btn-xs btn-success' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @articlehistories, renderer: BootstrapPagination::Rails %>
