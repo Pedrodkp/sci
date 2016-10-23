@@ -12,7 +12,7 @@
     <% end %>
   </dd>
   <dd><strong><%= model_class.human_attribute_name(:created_at) %>: </strong><%=l @article.created_at %></dd>
-  <dd><strong><%= model_class.human_attribute_name(:user) %>: </strong><%= @article.user.email %></dd>
+  <dd><strong><%= model_class.human_attribute_name(:user) %>: </strong><%= @article.user.name %></dd>
   <dd><br/></dd>
 </dl>
 

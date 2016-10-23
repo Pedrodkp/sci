@@ -10,7 +10,7 @@
   <dd><%= @articlehistory.body.html_safe %></dd> 
   <dd><%= @articlehistory.taxonomies %></dd> 
   <dd><strong><%= model_class.human_attribute_name(:created_at) %>: </strong><%=l @articlehistory.created_at %></dd>
-  <dd><strong><%= model_class.human_attribute_name(:user) %>: </strong><%= @articlehistory.user.email %></dd>
+  <dd><strong><%= model_class.human_attribute_name(:user) %>: </strong><%= @articlehistory.user.name %></dd>
   <dd><br/></dd>
 </dl>
 
