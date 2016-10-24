@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = ViewArticle.search(params[:search_by_text],
+                                   params[:search_by_id],
                                    params[:search_by_date_ini],
                                    params[:search_by_date_fim],
                                    sort_column,

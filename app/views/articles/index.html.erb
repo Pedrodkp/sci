@@ -6,10 +6,13 @@
 <%= form_tag(articles_path, :method => :get) do %> 
   <div class="row">  
     <div class='col-sm-4'>
-      <%= text_field_tag 'search_by_text', nil, placeholder: 'Palavras chaves', :class => 'form-control' %>
+      <%= text_field_tag 'search_by_text', nil, placeholder: 'Palavras chaves', :class => 'form-control' %>      
       <a href="#filtro_complexo" class="btn btn-xs btn-default" onclick="$('#filtro_complexo').toggle(); return false;">Busca avançada</a>
     </div>
-    <div class='col-sm-3'>
+    <div class='col-sm-1'>
+      <%= text_field_tag 'search_by_id', nil, placeholder: 'Id', :class => 'form-control' %>
+    </div>
+    <div class='col-sm-2'>
       <center>
         <%= submit_tag "Pesquisar", :class => 'btn btn-default' %>
         <%= link_to "Criar", new_article_path, :class => 'btn btn-primary' %>    
@@ -43,6 +46,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th><%= sortable "id", "Id" %></th>
       <th><%= sortable "title", "Título" %></th>
       <th><%= sortable "created_at", "Criado em" %></th>
       <th><%= sortable "likes", "Likes" %></th>
@@ -52,6 +56,7 @@
   <tbody>
     <% @articles.each do |article| %>
       <tr>
+        <td><%= article.id %></td>
         <td><%= link_to article.title, article_path(article) %></td>
         <td><%= article.created_at.strftime("%d/%m/%Y") %></td>
         <td><%= article.likes %></td>
