@@ -17,4 +17,13 @@
        <%= yield %>
     </main>
   </body>
+  <footer>
+    <div class="panel panel-default">
+      <% if current_user != nil %>
+        <div class="panel-heading">Logado como: <%= current_user.name %></div>
+      <% else %>
+        <div class="panel-heading">Sistema de Comunicação Inteligente %></div>
+      <% end %>
+    </div>
+  </footer>
 </html>

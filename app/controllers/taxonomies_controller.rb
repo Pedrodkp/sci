@@ -1,34 +1,31 @@
 class TaxonomiesController < ApplicationController
   before_action :set_taxonomy, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!  
+  before_action :set_taxonomy_types, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+  before_action :authenticate_user!    
+  helper_method :sort_column, :sort_direction    
 
-  # GET /taxonomies
-  # GET /taxonomies.json
   def index
-    if params[:search]
-      f = Taxonomy.search(params[:search])
-    else
-      f = Taxonomy.all
+    @taxonomies = Taxonomy.search(params[:search_by_text],
+                                  params[:search_by_type],
+                                  sort_column,
+                                  sort_direction
+                                 ).paginate(:page => params[:page], :per_page => 20) 
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @taxonomies.map(&:code) }    
     end
-    @taxonomies = f.paginate(:page => params[:page], :per_page => 5)
   end
 
-  # GET /taxonomies/1
-  # GET /taxonomies/1.json
   def show
   end
 
-  # GET /taxonomies/new
   def new
     @taxonomy = Taxonomy.new
   end
 
-  # GET /taxonomies/1/edit
   def edit
   end
 
-  # POST /taxonomies
-  # POST /taxonomies.json
   def create
     @taxonomy = Taxonomy.new(taxonomy_params)
     @taxonomy.user_id = current_user.id 
@@ -43,8 +40,6 @@ class TaxonomiesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /taxonomies/1
-  # PATCH/PUT /taxonomies/1.json
   def update
     respond_to do |format|
       if @taxonomy.update(taxonomy_params)
@@ -57,8 +52,6 @@ class TaxonomiesController < ApplicationController
     end
   end
 
-  # DELETE /taxonomies/1
-  # DELETE /taxonomies/1.json
   def destroy
     @taxonomy.destroy
     respond_to do |format|
@@ -68,13 +61,24 @@ class TaxonomiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_taxonomy
       @taxonomy = Taxonomy.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def taxonomy_params
-      params.require(:taxonomy).permit(:code, :description)
+    def set_taxonomy_types
+      @TAXONOMY_TYPES = ['Comum','Tela','Macro']      
     end
+
+    def taxonomy_params
+      params.require(:taxonomy).permit(:code, :description, :kind, :correlation)
+    end
+
+    def sort_column
+      params[:sort] || "code"
+    end
+
+    def sort_direction
+      params[:direction] || "desc"
+    end    
+
 end

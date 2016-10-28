@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161022223200) do
+ActiveRecord::Schema.define(version: 20161027215408) do
 
   create_table "article_histories", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -59,8 +59,12 @@ ActiveRecord::Schema.define(version: 20161022223200) do
     t.string   "attachments_content_type", limit: 255
     t.integer  "attachments_file_size",    limit: 4
     t.datetime "attachments_updated_at"
+    t.integer  "taxonomy_macro_id",        limit: 4
+    t.integer  "taxonomy_tela_id",         limit: 4
   end
 
+  add_index "articles", ["taxonomy_macro_id"], name: "fk_rails_fddd42c889", using: :btree
+  add_index "articles", ["taxonomy_tela_id"], name: "fk_rails_e2dc28ede4", using: :btree
   add_index "articles", ["user_id"], name: "index_articles_on_user_id", using: :btree
 
   create_table "attachments", force: :cascade do |t|
@@ -112,6 +116,20 @@ ActiveRecord::Schema.define(version: 20161022223200) do
   add_index "flaggings", ["flaggable_type", "flaggable_id"], name: "index_flaggings_on_flaggable_type_and_flaggable_id", using: :btree
   add_index "flaggings", ["flagger_type", "flagger_id", "flaggable_type", "flaggable_id"], name: "access_flaggings", using: :btree
 
+  create_table "makes", force: :cascade do |t|
+    t.string   "name",         limit: 255
+    t.integer  "webmotors_id", limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "models", force: :cascade do |t|
+    t.integer  "make_id",    limit: 4
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.text     "content",    limit: 65535
@@ -131,11 +149,13 @@ ActiveRecord::Schema.define(version: 20161022223200) do
   add_index "relationships", ["taxonomy_id"], name: "index_relationships_on_taxonomy_id", using: :btree
 
   create_table "taxonomies", force: :cascade do |t|
-    t.string   "code",        limit: 255
-    t.string   "description", limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "user_id",     limit: 4
+    t.string   "code",         limit: 255
+    t.string   "description",  limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "user_id",      limit: 4
+    t.string   "kind",         limit: 255
+    t.string   "correlations", limit: 255
   end
 
   add_index "taxonomies", ["user_id"], name: "index_taxonomies_on_user_id", using: :btree
@@ -173,12 +193,24 @@ ActiveRecord::Schema.define(version: 20161022223200) do
     t.integer  "likes",      limit: 8
   end
 
+  create_table "vw_article", id: false, force: :cascade do |t|
+    t.integer  "id",         limit: 4,          default: 0, null: false
+    t.string   "title",      limit: 255
+    t.text     "body",       limit: 4294967295
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "user_id",    limit: 4
+    t.integer  "likes",      limit: 8
+  end
+
   add_foreign_key "article_histories", "articles"
   add_foreign_key "article_histories", "users"
   add_foreign_key "article_likes", "articles"
   add_foreign_key "article_likes", "users"
   add_foreign_key "article_taxonomies", "articles"
   add_foreign_key "article_taxonomies", "taxonomies"
+  add_foreign_key "articles", "taxonomies", column: "taxonomy_macro_id"
+  add_foreign_key "articles", "taxonomies", column: "taxonomy_tela_id"
   add_foreign_key "articles", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"

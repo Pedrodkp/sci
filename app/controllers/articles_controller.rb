@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_default, only: [:index, :show, :new, :edit, :create, :update, :destroy]
   before_action :authenticate_user!
   helper_method :sort_column, :sort_direction  
 
@@ -25,7 +26,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    @article.user_id = current_user.id 
+    @article.user_id = current_user.id
     respond_to do |format|
       if @article.save
         format.html { redirect_to @article, notice: @article.title+t(:was_created) }
@@ -72,7 +73,11 @@ class ArticlesController < ApplicationController
   private
     def set_article
       @article = Article.find(params[:id])
+    end
+
+    def set_default
       @LIKE_LEVELS = ['Ótimo','Bom','Razoavel','Ruim','Péssimo']
+      @taxonomies_macros = Taxonomy.where("kind = 'Macro'")      
     end
 
     def article_params

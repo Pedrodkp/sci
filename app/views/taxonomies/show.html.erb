@@ -1,17 +1,22 @@
 <%- model_class = Taxonomy -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%= @taxonomy.code %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:code) %>:</strong></dt>
-  <dd><%= @taxonomy.code %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+<dl>
   <dd><%= @taxonomy.description %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:created_at) %>:</strong></dt>
-  <dd><%=l @taxonomy.created_at %></dd>    
-  <dt><strong><%= model_class.human_attribute_name(:user) %>:</strong></dt>
-  <dd><%= @taxonomy.user.name %></dd>    
+  <dd><strong>Tipo: </strong><%= @taxonomy.kind %></dd>
+  <dd><strong>Sinonimos: </strong><%= @taxonomy.correlations %></dd>
+  <dd><strong><%= model_class.human_attribute_name(:created_at) %>: </strong><%=l @taxonomy.created_at %></dd>
+  <dd><strong><%= model_class.human_attribute_name(:user) %>:</strong>
+  <% if @taxonomy.user != nil %>
+    <%= @taxonomy.user.name %>
+  <% else %>
+    <%= @taxonomy.relationships.first.article.user.name %>
+     no artigo id: 
+    <%= @taxonomy.relationships.first.article.id %>
+  <% end %>
+  </dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

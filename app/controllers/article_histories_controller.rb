@@ -1,6 +1,7 @@
 class ArticleHistoriesController < ApplicationController
   before_action :set_article, only: [:show, :index]
   helper_method :sort_column, :sort_direction    
+  before_action :authenticate_user!
 
   def show
     @articlehistory = ArticleHistory.find(params[:id])    

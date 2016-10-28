@@ -14,4 +14,12 @@ class Article < ActiveRecord::Base
   has_many :articlehistories, :class_name => 'ArticleHistory'
 
  	accepts_nested_attributes_for :relationships, :articlelikes, reject_if: :all_blank, allow_destroy: true
+
+  def taxonomy_tela_code 
+    Taxonomy.try(:code)
+  end
+
+  def taxonomy_tela_code=(code) 
+    self.taxonomy = Taxonomy.find_by_code(code) if code.present?
+  end   
 end

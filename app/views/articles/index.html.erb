@@ -40,7 +40,6 @@
     <div class='col-sm-4'> </div>         
   </div>
 <% end %>
-
 <br/>
 
 <table class="table table-striped">
@@ -56,8 +55,8 @@
   <tbody>
     <% @articles.each do |article| %>
       <tr>
-        <td><%= article.id %></td>
-        <td><%= link_to article.title, article_path(article) %></td>
+        <td><%= link_to article.id, article_path(article) %></td>
+        <td><%= article.title %></td>
         <td><%= article.created_at.strftime("%d/%m/%Y") %></td>
         <td><%= article.likes %></td>
         <td>

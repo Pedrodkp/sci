@@ -4,15 +4,38 @@
 </div>
 
 <%= form_tag(taxonomies_path, :method => :get) do %>
-  <%= text_field_tag 'search', nil, placeholder: 'Pesquisa da Taxonomia' %>
-  <%= submit_tag "Pesquisar" %>
+  <div class="row">  
+    <div class='col-sm-4'>
+      <%= text_field_tag 'search_by_text', nil, placeholder: 'Texto para pesquisa', :class => 'form-control' %>      
+      <a href="#filtro_complexo" class="btn btn-xs btn-default" onclick="$('#filtro_complexo').toggle(); return false;">Busca avançada</a>
+    </div>
+    <div class='col-sm-3'>
+      <center>
+        <%= submit_tag "Pesquisar", :class => 'btn btn-default' %>
+        <%= link_to "Criar", new_taxonomy_path, :class => 'btn btn-primary' %>    
+      </center>
+    </div>
+    <div class='col-sm-5'> </div>
+  </div>
+  <br/>
+
+  <div id="filtro_complexo" style="display:none">
+    <div class='col-sm-2'>  
+      <%= label "search_by_kind", 'Tipo', :class => 'col-lg' %>
+      <%= select_tag "search_by_kind", options_for_select(@TAXONOMY_TYPES), {:class => "form-control", include_blank: true} %>
+    </div>
+    </br>
+    <div class='col-sm-10'></div>         
+  </div>
 <% end %>
 <br/>
+
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:code) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= sortable "code", "Código" %></th>
+      <th><%= sortable "kind", "Tipo" %></th>
+      <th><%= sortable "description", "Descrição" %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -20,8 +43,10 @@
     <% @taxonomies.each do |taxonomy| %>
       <tr>
         <td><%= link_to taxonomy.code, taxonomy_path(taxonomy) %></td>
+        <td><%= taxonomy.kind %></td>
         <td><%= taxonomy.description %></td>
         <td>
+          <%= link_to 'Ver', taxonomy_path(taxonomy), :class => 'btn btn-xs btn-success' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_taxonomy_path(taxonomy), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -34,7 +59,4 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_taxonomy_path,
-            :class => 'btn btn-primary' %>
+<%= will_paginate @articles, renderer: BootstrapPagination::Rails %>

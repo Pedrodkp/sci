@@ -6,11 +6,12 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   
+  resources :taxonomies      
+
   resources :articles do
     resources :article_likes
     resources :article_histories
     resources :relationships
-    resources :taxonomies    
   end
   
   resources :posts do
