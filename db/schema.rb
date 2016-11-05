@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027215408) do
+ActiveRecord::Schema.define(version: 20161102231918) do
 
   create_table "article_histories", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -184,16 +184,6 @@ ActiveRecord::Schema.define(version: 20161027215408) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "view_articles", id: false, force: :cascade do |t|
-    t.integer  "id",         limit: 4,          default: 0, null: false
-    t.string   "title",      limit: 255
-    t.text     "body",       limit: 4294967295
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.integer  "user_id",    limit: 4
-    t.integer  "likes",      limit: 8
-  end
-
-  create_table "vw_article", id: false, force: :cascade do |t|
     t.integer  "id",         limit: 4,          default: 0, null: false
     t.string   "title",      limit: 255
     t.text     "body",       limit: 4294967295

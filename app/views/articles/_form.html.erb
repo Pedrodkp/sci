@@ -24,13 +24,14 @@
 
   <div class="form-group">    
     <div class="col-lg-2">
-      <%= f.label :taxonomy_macro_id, 'TAG Macro', :class => 'col-lg' %>
-      <%= f.select_tag :taxonomy_macro_id, options_from_collection_for_select(@taxonomies_macros, "id", "code"), :class => 'form-control' %>
+      <%= f.label 'article[taxonomy_macro_id]', 'Tag Macro', :class => 'col-lg' %>
+      <%= f.select_tag 'article[taxonomy_macro_id]', 
+        options_from_collection_for_select(@taxonomies_macros, "id", "code", @article.taxonomy_macro_id), {:class => "form-control"} %>
     </div>
 
     <div class="col-lg-10">
       <%= f.label :taxonomy_tela_code, 'Tela', :class => 'col-lg' %>
-      <%= f.text_field :taxonomy_tela_code, data: {autocomplete_sourte: taxonomies_path}, :class => 'form-control' %>
+      <%= f.text_field :taxonomy_tela_code, data: {autocomplete_source: taxonomies_path(search_by_type: 'Tela')}, :class => 'form-control' %>
     </div>    
   </div>  
 

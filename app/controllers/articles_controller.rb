@@ -81,7 +81,7 @@ class ArticlesController < ApplicationController
     end
 
     def article_params
-      params.require(:article).permit(:title, :body, :attachments,
+      params.require(:article).permit(:title, :body, :taxonomy_macro_id, :taxonomy_tela_code, :attachments,
                                       :relationships_attributes => [:id, :article_id, :taxonomy_id, :_destroy, 
                                                                     :taxonomy_attributes => [:id, :code]])      
     end

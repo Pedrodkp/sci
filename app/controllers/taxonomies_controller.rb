@@ -5,7 +5,13 @@ class TaxonomiesController < ApplicationController
   helper_method :sort_column, :sort_direction    
 
   def index
-    @taxonomies = Taxonomy.search(params[:search_by_text],
+    if params[:search_by_text].present?
+      search_by_text = params[:search_by_text]
+    elsif params[:term].present?
+      search_by_text = params[:term]
+    end
+
+    @taxonomies = Taxonomy.search(search_by_text,
                                   params[:search_by_type],
                                   sort_column,
                                   sort_direction

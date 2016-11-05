@@ -1,6 +1,13 @@
 class Article < ActiveRecord::Base
 	validates :title, presence: true, uniqueness: true
  	validates :body, presence: true
+  validate :taxonomy_tela_code_is_valid
+
+  def taxonomy_tela_code_is_valid
+    if (taxonomy_tela_id == -1)
+      errors.add(:taxonomy_tela_code, "Tela invalida.")
+    end
+  end
 
  	belongs_to :user
 
@@ -15,11 +22,38 @@ class Article < ActiveRecord::Base
 
  	accepts_nested_attributes_for :relationships, :articlelikes, reject_if: :all_blank, allow_destroy: true
 
-  def taxonomy_tela_code 
-    Taxonomy.try(:code)
+  def taxonomy_macro
+    if self.taxonomy_macro_id != nil
+      Taxonomy.find(self.taxonomy_macro_id)
+    else
+      nil
+    end
+  end
+
+  def taxonomy_tela
+    if self.taxonomy_tela_id != nil
+      Taxonomy.find(self.taxonomy_tela_id)
+    else
+      nil
+    end
   end
 
   def taxonomy_tela_code=(code) 
-    self.taxonomy = Taxonomy.find_by_code(code) if code.present?
-  end   
+    if code.present?
+      taxonomy_tela = Taxonomy.find_by_code(code) 
+      if taxonomy_tela == nil
+        self.taxonomy_tela_id = -1
+      else
+        self.taxonomy_tela_id = taxonomy_tela.id
+      end
+    else
+      self.taxonomy_tela_id = nil
+    end
+  end
+
+  def taxonomy_tela_code 
+    if self.taxonomy_tela_id != nil && self.taxonomy_tela_id != -1
+      Taxonomy.find(self.taxonomy_tela_id).code
+    end 
+  end
 end

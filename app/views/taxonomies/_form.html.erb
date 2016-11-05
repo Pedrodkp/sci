@@ -22,7 +22,7 @@
     </div>
     <div class='col-lg-2'>  
       <%= f.label "taxonomy[kind]", 'Tipo', :class => 'col-lg' %>
-      <%= f.select_tag "taxonomy[kind]", options_for_select(@TAXONOMY_TYPES), {:class => "form-control"} %>   
+      <%= f.select_tag "taxonomy[kind]", options_for_select(@TAXONOMY_TYPES, @taxonomy.kind), {:class => "form-control"} %>   
     </div>    
   </div>
   <div class="form-group">

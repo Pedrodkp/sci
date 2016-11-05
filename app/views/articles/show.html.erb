@@ -5,6 +5,10 @@
 
 <dl>
   <dd><%= @article.body.html_safe %></dd> 
+  <dd><strong>Tag Macro: </strong><%= @article.taxonomy_macro.code %></dd>
+  <% if @article.taxonomy_tela != nil %>  
+    <dd><strong>Tela: </strong><%= @article.taxonomy_tela.code %></dd>
+  <% end %>
   <dd>
     <strong>Tags: </strong>
     <% @article.taxonomies.each do |taxonomies| %>
