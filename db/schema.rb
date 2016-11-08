@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102231918) do
+ActiveRecord::Schema.define(version: 20161027215408) do
 
   create_table "article_histories", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -115,20 +115,6 @@ ActiveRecord::Schema.define(version: 20161102231918) do
   add_index "flaggings", ["flag", "flagger_type", "flagger_id", "flaggable_type", "flaggable_id"], name: "access_flag_flaggings", using: :btree
   add_index "flaggings", ["flaggable_type", "flaggable_id"], name: "index_flaggings_on_flaggable_type_and_flaggable_id", using: :btree
   add_index "flaggings", ["flagger_type", "flagger_id", "flaggable_type", "flaggable_id"], name: "access_flaggings", using: :btree
-
-  create_table "makes", force: :cascade do |t|
-    t.string   "name",         limit: 255
-    t.integer  "webmotors_id", limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
-  create_table "models", force: :cascade do |t|
-    t.integer  "make_id",    limit: 4
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
 
   create_table "posts", force: :cascade do |t|
     t.string   "title",      limit: 255

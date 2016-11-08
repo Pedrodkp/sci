@@ -1,10 +1,11 @@
 module Features
   module SessionHelpers
     def insert_an_article
-      user = test_user
-      signin(user.email, user.password)
+      insert_an_taxonomy_macro
       visit new_article_path
       fill_in('Título', :with => 'Artigo Teste 1')
+      #puts page.body
+      select "TAG Macro", :from => 'article[taxonomy_macro_id]'
       fill_in('Artigo', :with => 'teste texto do artigo')
       click_button 'Salvar'
     end
