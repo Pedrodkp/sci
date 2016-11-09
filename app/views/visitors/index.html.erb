@@ -1,44 +1,11 @@
-<!-- Image Background Page Header -->
-<!-- Note: The background image is set within the business-casual.css file. -->
-<header class="business-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="tagline">
-                    <font color="#FF0000">S</font>istema de<br/>
-                    <font color="#FF0000">C</font>omunicação<br/>
-                    <font color="#FF0000">I</font>nteligente
-                </h1>
-            </div>
-        </div>
-    </div>
-</header>
+<%= render 'layouts/header_sci' %>
 
 <!-- Page Content -->
 <div class="container">
 
     <% if not user_signed_in? %>
-        <hr/>
-        <div class="row">
-            <div class="col-sm-8">
-                <h2>O que é?</h2>
-                <p>Um sistema desenhado para ajudar em suas dúvidas.</p>
-                <p>Faça perguntas, começe discussões no fórum, e crie artigos que ajudaram outros!</p>
-                <br/>            
-                <p>"Nenhum talento individual por maior que seja será maior que o esforço coletivo de todos."</p>
-                <br/>            
-            </div>
-            <div class="col-sm-4">
-                <h2><%= t('contact_us') %></h2>
-                <address>
-                    <strong>NSI / BySoft</strong>
-                    <br/> (19) 3720.2000
-                    <br/><%= mail_to("grupo.b@ecomex.com.br", name = nil, html_options = {}) %></a>
-                    <br/>Rua Carlos Gomes, 1321 – 3º Andar Pátio Office – Centro – Limeira/SP CEP 13.480-013
-                    <br/>
-                </address>
-            </div>
-        </div>
+        <p>Você não deveria estar aqui sem nós sabermos quem é, desculpe.</p>
+        <p>Faça login no sistema e seja bem vindo!</p>              
     <!-- /.row -->
     <% else %>    
         <hr/>
@@ -49,6 +16,9 @@
               <%= text_field_tag 'search_by_text', nil, class: "btn btn-default btn-lg", placeholder: 'Palavras chaves' %>
               <%= submit_tag "Buscar &raquo;".html_safe, class: "btn btn-default btn-lg" %>
             <% end %>        
+            <hr/>
+            <p>Um sistema desenhado para ajudar em suas dúvidas.</p>
+            <p>Faça perguntas, começe discussões no fórum, e crie artigos que ajudaram outros!</p>                    
         </p>
         <hr/>
         <div class="row">

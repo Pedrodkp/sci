@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'article_histories/index'
-
   mount Ckeditor::Engine => '/ckeditor'
   root to: 'visitors#index'
   devise_for :users

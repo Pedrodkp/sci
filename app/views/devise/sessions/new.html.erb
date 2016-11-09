@@ -1,3 +1,5 @@
+<%= render 'layouts/header_sci' %>
+
 <div class="authform">
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
     <h3><%= t('sign_in') %></h3>
@@ -26,4 +28,20 @@
         </div>
       <% end -%>
   <% end %>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <center>
+      <p>"Nenhum talento individual por maior que seja será maior que o esforço coletivo de todos."</p>
+    </center>
+  </div>
+  <div class="col-sm-12">
+    <address>
+      <strong>NSI / BySoft</strong>
+      <br/> (19) 3720.2000 <%= mail_to("grupo.b@ecomex.com.br", name = nil, html_options = {}) %></a>
+      <br/>Rua Carlos Gomes, 1321 – 3º Andar Pátio Office – Centro – Limeira/SP CEP 13.480-013
+      <br/>
+    </address>
+  </div>
 </div>
