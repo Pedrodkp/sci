@@ -12,9 +12,10 @@ class ArticlesController < ApplicationController
                                    sort_column,
                                    sort_direction
                                   ).paginate(:page => params[:page], :per_page => 20)
+    flash[:notice] = @articles.length == 0 ? 'Nenhum artigo encontrado.' : @articles.length.to_s+' artigos encontrados.'
   end
 
-  def show
+  def show    
   end
 
   def new

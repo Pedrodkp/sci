@@ -16,6 +16,7 @@ class TaxonomiesController < ApplicationController
                                   sort_column,
                                   sort_direction
                                  ).paginate(:page => params[:page], :per_page => 20) 
+    flash[:notice] = @taxonomies.length == 0 ? 'Nenhuma TAG encontrada.' : @taxonomies.length.to_s+' TAGs encontradas.' 
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @taxonomies.map(&:code) }    

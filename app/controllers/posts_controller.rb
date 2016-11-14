@@ -8,7 +8,8 @@ class PostsController < ApplicationController
       else
         f = Post.all.order("created_at DESC")
       end
-      @posts = f.paginate(:page => params[:page], :per_page => 10)	  
+      @posts = f.paginate(:page => params[:page], :per_page => 10)	 
+      flash[:notice] = @posts.length == 0 ? 'Nenhum tópico encontrado.' : @posts.length.to_s+' tópicos encontrados.' 
 	end
 
 	def show
