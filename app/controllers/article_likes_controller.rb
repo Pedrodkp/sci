@@ -3,21 +3,19 @@ class ArticleLikesController < ApplicationController
   before_action :authenticate_user!  
 
   def create   
-    if (article_likes_params['like_level'] == 'Ruim' or article_likes_params['like_level'] == 'Péssimo') and 
-       article_likes_params['comment'] == ''
-      msg = "Não gostou do artigo? É importante que nos diga como podemos melhora-lo, pode comentar?"
-      redirect_to article_path(@article), notice: msg
+    if (article_likes_params['like_level'] == 'Ruim' or article_likes_params['like_level'] == 'Péssimo')
+       if article_likes_params['comment'] == ''
+         msg =  "Não gostou do artigo? É importante que nos diga como podemos melhora-lo, pode comentar?"
+       elsif article_likes_params['comment'].length < 30
+         msg =  "Comentário preenchido precisa ter mais de 30 caracteres."
+       end
     else
       @articlelike = @article.articlelikes.create(article_likes_params)
       @articlelike.user_id = current_user.id
       @articlelike.save
-      if @articlelike.save
-        msg = "Obrigado pelo sua opnião, os autores agradecem!"
-        redirect_to article_path(@article), notice: msg
-      else
-        render 'new'
-      end
+      msg = "Obrigado pelo sua opnião, os autores agradecem!"
     end    
+    redirect_to article_path(@article), notice: msg
   end
 
   def destroy
