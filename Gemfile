@@ -16,7 +16,7 @@ gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) support
 gem "twitter-bootstrap-rails"
 gem 'will_paginate', '~> 3.1.0'
 gem 'sprockets', '3.6.3'
-gem 'ckeditor'
+gem 'ckeditor', '4.2.0'
 gem 'paperclip'
 gem 'cocoon'
 gem 'paperclip_database', '~> 2.3', '>= 2.3.1'
