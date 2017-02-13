@@ -4,7 +4,7 @@
     <p>Vamos enviar um e-mail com as instruções para gerar uma nova.</p>
     <%= devise_error_messages! %>
     <div class="form-group">
-      <%= f.label :email, 'Senha' %>
+      <%= f.label :email, 'E-Mail' %>
       <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
     </div>
      <%= f.submit 'Resetar Senha', :class => 'button right' %>

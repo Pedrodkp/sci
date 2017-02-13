@@ -20,7 +20,7 @@ Rails.application.configure do
     ssl: false
   }
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'sci.ecomex.com.br' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.assets.digest = true
