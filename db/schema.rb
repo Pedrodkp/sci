@@ -39,16 +39,6 @@ ActiveRecord::Schema.define(version: 20161027215408) do
   add_index "article_likes", ["article_id"], name: "index_article_likes_on_article_id", using: :btree
   add_index "article_likes", ["user_id"], name: "index_article_likes_on_user_id", using: :btree
 
-  create_table "article_taxonomies", force: :cascade do |t|
-    t.integer  "article_id",  limit: 4
-    t.integer  "taxonomy_id", limit: 4
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
-  add_index "article_taxonomies", ["article_id"], name: "index_article_taxonomies_on_article_id", using: :btree
-  add_index "article_taxonomies", ["taxonomy_id"], name: "index_article_taxonomies_on_taxonomy_id", using: :btree
-
   create_table "articles", force: :cascade do |t|
     t.string   "title",                    limit: 255
     t.text     "body",                     limit: 4294967295
@@ -100,21 +90,6 @@ ActiveRecord::Schema.define(version: 20161027215408) do
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
-
-  create_table "flaggings", force: :cascade do |t|
-    t.string   "flaggable_type", limit: 255
-    t.integer  "flaggable_id",   limit: 4
-    t.string   "flagger_type",   limit: 255
-    t.integer  "flagger_id",     limit: 4
-    t.string   "flag",           limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "flaggings", ["flag", "flaggable_type", "flaggable_id"], name: "index_flaggings_on_flag_and_flaggable_type_and_flaggable_id", using: :btree
-  add_index "flaggings", ["flag", "flagger_type", "flagger_id", "flaggable_type", "flaggable_id"], name: "access_flag_flaggings", using: :btree
-  add_index "flaggings", ["flaggable_type", "flaggable_id"], name: "index_flaggings_on_flaggable_type_and_flaggable_id", using: :btree
-  add_index "flaggings", ["flagger_type", "flagger_id", "flaggable_type", "flaggable_id"], name: "access_flaggings", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -183,8 +158,6 @@ ActiveRecord::Schema.define(version: 20161027215408) do
   add_foreign_key "article_histories", "users"
   add_foreign_key "article_likes", "articles"
   add_foreign_key "article_likes", "users"
-  add_foreign_key "article_taxonomies", "articles"
-  add_foreign_key "article_taxonomies", "taxonomies"
   add_foreign_key "articles", "taxonomies", column: "taxonomy_macro_id"
   add_foreign_key "articles", "taxonomies", column: "taxonomy_tela_id"
   add_foreign_key "articles", "users"
