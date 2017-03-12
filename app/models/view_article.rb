@@ -16,7 +16,6 @@ class ViewArticle < ActiveRecord::Base
     f = f.where('view_articles.id = :search_by_id',search_by_id: "#{search_by_id}" ) if search_by_id.present?
     f = f.where("DATE(view_articles.created_at) >= STR_TO_DATE(:search_by_date_ini,'%Y-%m-%d')",search_by_date_ini: "#{search_by_date_ini}") if search_by_date_ini.present?
     f = f.where("DATE(view_articles.created_at) <= STR_TO_DATE(:search_by_date_fim,'%Y-%m-%d')",search_by_date_fim: "#{search_by_date_fim}") if search_by_date_fim.present?
-    f = f.group("view_articles.id, view_articles.title, view_articles.body, view_articles.created_at, view_articles.updated_at, view_articles.user_id")
     f = f.order(sort_column + " " + sort_direction)    
   end
 end

@@ -11,8 +11,9 @@ class ArticlesController < ApplicationController
                                    params[:search_by_date_fim],
                                    sort_column,
                                    sort_direction
-                                  ).paginate(:page => params[:page], :per_page => 20)
+                                  )
     flash[:notice] = @articles.length == 0 ? 'Nenhum artigo encontrado.' : @articles.length.to_s+' artigos encontrados.'
+    @articles = @articles.paginate(:page => params[:page], :per_page => 20)
   end
 
   def show    
