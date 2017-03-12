@@ -1,14 +1,14 @@
 class Article < ActiveRecord::Base
 	validates :title, presence: true, uniqueness: true
  	validates :body, presence: true
-  validate :taxonomy_tela_code_is_valid, on: [:save, :update]
+  validate :taxonomy_tela_code_is_valid, on: [:create, :update]
 
   def taxonomy_tela_code_is_valid
     if (self.taxonomy_tela_id != nil) 
       if (self.taxonomy_tela_id == -1)
-        errors.add(:taxonomy_tela_code, "Tela não existe.")
+        errors.add(:taxonomy_tela_code, "não existe.")
       elsif !Taxonomy.find(self.taxonomy_tela_id).code.include?(Taxonomy.find(self.taxonomy_macro_id).code)
-        errors.add(:taxonomy_tela_code, "Tela não pertence a TAG macro.")
+        errors.add(:taxonomy_tela_code, "não pertence a TAG macro.")
       end
     end
   end
