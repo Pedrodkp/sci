@@ -65,6 +65,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    authorize @article
     @article.destroy
     respond_to do |format|
       format.html { redirect_to articles_url, notice: @article.title+t(:was_destroyed) }

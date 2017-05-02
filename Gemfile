@@ -22,6 +22,7 @@ gem 'cocoon'
 gem 'paperclip_database', '~> 2.3', '>= 2.3.1'
 gem 'haml', '~> 4.0.5'
 gem 'will_paginate-bootstrap'
+gem "pundit"
 #gem 'wice_grid', '3.6.0.pre4'
 #gem 'font-awesome-sass',  '~> 4.3'
 group :development do
