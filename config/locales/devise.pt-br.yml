@@ -15,7 +15,7 @@ pt-BR:
       not_found_in_database: 'E-mail ou senha inválidos.'
       timeout: 'Sua sessão expirou, por favor, efetue login novamente para continuar.'
       unauthenticated: 'Para continuar, efetue login ou registre-se.'
-      unconfirmed: 'Antes de continuar, confirme a sua conta.'
+      unconfirmed: 'Antes de continuar, confirme a sua conta, caso precise envie outro e-mail em: Esqueci a senha.'
     mailer:
       confirmation_instructions:
         subject: 'Instruções de confirmação'

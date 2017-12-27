@@ -5,8 +5,9 @@
     <%= devise_error_messages! %>
     <div class="form-group">
       <%= f.label :email, 'E-Mail' %>
+      <%= link_to "Faltou confirmar?", new_user_confirmation_path(resource_name), class: 'right' %>
       <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
-    </div>
+    </div>     
      <%= f.submit 'Resetar Senha', :class => 'button right' %>
   <% end %>
 </div>
