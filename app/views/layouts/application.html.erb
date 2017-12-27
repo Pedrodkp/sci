@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Sci" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "SCI" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Sci" %>">
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
@@ -14,16 +14,10 @@
     </header>
     <main role="main">
        <%= render 'layouts/messages' %>
-       <%= yield %>
+       <div class="fluid">
+         <%= yield %>       
+        </div>
     </main>
+    <%= render 'layouts/footer' %>
   </body>
-  <footer>
-    <div class="panel panel-default">
-      <% if current_user != nil %>
-        <div class="panel-heading">Logado como: <%= current_user.name %></div>
-      <% else %>
-        <div class="panel-heading">Sistema de Comunicação Inteligente</div>
-      <% end %>
-    </div>
-  </footer>
 </html>

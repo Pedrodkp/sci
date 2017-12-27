@@ -1,0 +1,10 @@
+<footer class="well">
+  <div class="site-footer-left">
+    <strong>New Soft Intelligence</strong> (19) 3720.2000 <%= link_to("www.ecomex.com.br","http://www.ecomex.com.br") %>
+  </div>
+  <div class="site-footer-right">
+    <% if current_user != nil %>
+      Logado como <strong><%= current_user.name %></strong>
+    <% end %>  
+  </div>
+</footer>

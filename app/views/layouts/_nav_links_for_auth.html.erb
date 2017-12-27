@@ -1,6 +1,7 @@
+<li><%= link_to "SCI", root_path %></li>
 <% if user_signed_in? %>
-  <li><%= link_to t('.title', :default => Article.model_name.human.pluralize.titleize), articles_path %></li>
-  <li><%= link_to 'TAGs', taxonomies_path %></li>
+  <li><%= link_to 'Artigos', articles_path %></li>
+  <li><%= link_to 'Tags', taxonomies_path %></li>
   <li><%= link_to 'Fórum', posts_path %></li>
   <li><%= link_to 'Usuários', users_path %></li>
   <li><%= link_to t('edit_account'), edit_user_registration_path %></li>
@@ -9,5 +10,5 @@
   <li><%= link_to t('sign_in'), new_user_session_path %></li>
   <li><%= link_to t('sign_up'), new_user_registration_path %></li>  
 <% end %>
+<li><%= link_to 'Manual', asset_path('Manual_SCI_v2.pdf') %></li>
 <li><%= link_to t(:about), page_path('about') %></li>
-<li><%= link_to 'Baixar MANUAL', asset_path('Manual_SCI_v2.pdf') %></li>

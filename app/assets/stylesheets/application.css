@@ -6,3 +6,19 @@
  *= require_tree .
 */
 
+main {
+  background-color: white !important;
+  padding-bottom: 10px !important;
+}
+
+.site-footer-left {
+    float: left;
+}
+
+.site-footer-right {
+    float: right;
+}
+
+.navbar-nav li a {
+  color: white !important;
+}
