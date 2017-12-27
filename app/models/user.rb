@@ -11,4 +11,10 @@ class User < ActiveRecord::Base
   has_many :articlelikes
   has_many :posts
   has_many :comments  
+
+  def name
+    nome = self[:email].split("@")[0]    
+    nome = nome.sub!("."," ") if nome.include? "."
+    nome = nome.titleize
+  end  
 end
