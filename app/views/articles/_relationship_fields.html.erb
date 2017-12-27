@@ -2,7 +2,7 @@
   <%= f.fields_for :taxonomy do |relationship_taxonomy| %>    
     <div class="col-sm-2">
       <%= relationship_taxonomy.text_field :code, :class => 'form-control' %>
-      <%= link_to_remove_association f, :class => 'btn btn-xs btn-danger' %>
+      <%= link_to_remove_association f, :class => 'btn btn-xs btn-danger active' %>
     </div>
   <% end %> 
 </div>

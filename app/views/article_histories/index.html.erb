@@ -18,7 +18,7 @@
         <td><%= link_to articlehistory.name, article_article_history_path(articlehistory.article_id, articlehistory.id) %></td>
         <td><%= articlehistory.created_at.strftime("%d/%m/%Y") %></td>
         <td>
-          <%= link_to 'Ver', article_article_history_path(articlehistory.article_id, articlehistory.id), :class => 'btn btn-xs btn-success' %>
+          <%= link_to 'Ver', article_article_history_path(articlehistory.article_id, articlehistory.id), :class => 'btn btn-xs btn-success active' %>
         </td>
       </tr>
     <% end %>

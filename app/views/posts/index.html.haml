@@ -5,8 +5,8 @@
 = form_tag(posts_path, :method => :get) do
   .col-sm-4
     = text_field_tag 'search', nil, placeholder: 'Pesquisa no Fórum', :class => 'form-control'
-  = submit_tag "Pesquisar", :class => 'btn btn-default'
-  = link_to "Novo Tópico", new_post_path, :class => 'btn btn-primary'
+  = submit_tag "Pesquisar", :class => 'btn btn-default active'
+  = link_to "Novo Tópico", new_post_path, :class => 'btn btn-primary active'
 
 %br
 
@@ -28,6 +28,6 @@
             por 
             = post.user.name
         %td
-          = link_to 'Ver', post_path(post), :class => 'btn btn-xs btn-success'
+          = link_to 'Ver', post_path(post), :class => 'btn btn-xs btn-success active'
 
 = will_paginate @posts, renderer: BootstrapPagination::Rails

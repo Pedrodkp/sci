@@ -14,8 +14,8 @@
     </div>
     <div class='col-sm-2'>
       <center>
-        <%= submit_tag "Pesquisar", :class => 'btn btn-default' %>
-        <%= link_to "Criar", new_article_path, :class => 'btn btn-primary' %>    
+        <%= submit_tag "Pesquisar", :class => 'btn btn-default active' %>
+        <%= link_to "Criar", new_article_path, :class => 'btn btn-primary active' %>    
       </center>
     </div>
     <div class='col-sm-5'> </div>
@@ -60,14 +60,14 @@
         <td><%= article.created_at.strftime("%d/%m/%Y") %></td>
         <td><%= article.likes %></td>
         <td>
-          <%= link_to 'Ver', article_path(article), :class => 'btn btn-xs btn-success' %>
+          <%= link_to 'Ver', article_path(article), :class => 'btn btn-xs btn-success active' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_article_path(article), :class => 'btn btn-default btn-xs' %>
+                      edit_article_path(article), :class => 'btn btn-default btn-xs active' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       article_path(article),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
+                      :class => 'btn btn-xs btn-danger active' %>
         </td>
       </tr>
     <% end %>

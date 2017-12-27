@@ -1,4 +1,4 @@
-<li><%= link_to "SCI", root_path %></li>
+<li><%= link_to "SCI", root_path, style: 'color:red !important' %></li>
 <% if user_signed_in? %>
   <li><%= link_to 'Artigos', articles_path %></li>
   <li><%= link_to 'Tags', taxonomies_path %></li>

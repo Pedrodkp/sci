@@ -42,7 +42,7 @@
       'data-association-insertion-node' => "#relationships-taxonomy", 
       'data-association-insertion-method' => "append", 
         :wrap_object => Proc.new {|relationship| relationship.build_taxonomy; relationship}, 
-      :class => 'btn btn-xs btn-success' %>
+      :class => 'btn btn-xs btn-success active' %>
     </div>
   </div>
 
@@ -72,8 +72,8 @@
 
   <div class="form-group">
     <div class="col-lg-10">
-      <%= f.submit "Salvar", :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")), articles_path, :class => 'btn btn-default' %>
+      <%= f.submit "Salvar", :class => 'btn btn-primary active' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")), articles_path, :class => 'btn btn-default active' %>
     </div>
   </div>
 

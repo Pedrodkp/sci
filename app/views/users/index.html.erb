@@ -22,7 +22,7 @@
         <td><%= user.created_at.strftime("%d/%m/%Y") %></td>
         <td><%= user.confirmed_at.strftime("%d/%m/%Y") if user.confirmed_at.present? %></td>
         <td>
-          <%= link_to 'Ver', user_path(user), :class => 'btn btn-xs btn-success' %>
+          <%= link_to 'Ver', user_path(user), :class => 'btn btn-xs btn-success active' %>
         </td>
       </tr>
     <% end %>

@@ -4,5 +4,5 @@
   %br
   por 
   = comment.user.name
-  = link_to "Editar", edit_post_comment_path(comment.post, comment), :class => 'btn btn-default btn-xs'
-  = link_to "Deletar", [comment.post, comment], method: :delete, data: {confirm: "Você tem certeza?"}, :class => 'btn btn-xs btn-danger'
+  = link_to "Editar", edit_post_comment_path(comment.post, comment), :class => 'btn btn-default btn-xs active'
+  = link_to "Deletar", [comment.post, comment], method: :delete, data: {confirm: "Você tem certeza?"}, :class => 'btn btn-xs btn-danger active'
