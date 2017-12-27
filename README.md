@@ -19,7 +19,7 @@ Deploy
 
 Com usuário ecomex (senha com infra@ecomex.com.br) logar na maquina XORN hospedada na NSI.
 1) Mudar para usuario root: 
-   sudo su -
+sudo su -
 2) Matar todos os processos usando (kill -9 xxx) que encontrar com:
    ps aux | grep rails
 3) Fazer backup da pasta SCI:
