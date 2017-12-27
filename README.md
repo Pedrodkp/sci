@@ -34,7 +34,7 @@ Com usuário ecomex (senha com infra@ecomex.com.br) logar na maquina XORN hosped
 
   rm -rf /sci/public/assets
   rm /sci/config/secrets.yml
-5)Copie pastas e arquivos de imagens e configurações do backup:
+6)Copie pastas e arquivos de imagens e configurações do backup:
 
   cp -r /sci_bkp/public/assets /sci/public
   cp -r /sci_bkp/public/ckeditor_assets /sci/public
