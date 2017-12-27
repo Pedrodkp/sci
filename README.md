@@ -19,8 +19,7 @@ Deploy
 
 Com usuário ecomex (senha com infra@ecomex.com.br) logar na maquina XORN hospedada na NSI.
 1) Mudar para usuario root: 
-
-   sudo su -
+      sudo su -
 2) Matar todos os processos usando (kill -9 xxx) que encontrar com:
 
    ps aux | grep rails
@@ -31,9 +30,8 @@ Com usuário ecomex (senha com infra@ecomex.com.br) logar na maquina XORN hosped
 
    git clone https://github.com/Pedrodkp/sci.git   
 5) Apague pastas e arquivos de imagens e configurações do deploy:
-
-  rm -rf /sci/public/assets
-  rm /sci/config/secrets.yml
+      rm -rf /sci/public/assets
+      rm /sci/config/secrets.yml
 6)Copie pastas e arquivos de imagens e configurações do backup:
 
   cp -r /sci_bkp/public/assets /sci/public
