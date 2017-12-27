@@ -1,0 +1,5 @@
+#bkp sci
+20 06 * * * /tmp/bkp_sci.sh >> /tmp/bkp_sci.log 2>&1
+
+#boot sci
+@reboot cd /sci && sudo rails s -b 0.0.0.0 -p 80 >> /tmp/boot_sci.log 2>&1
