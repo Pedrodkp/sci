@@ -13,8 +13,12 @@ class User < ActiveRecord::Base
   has_many :comments  
 
   def name
-    nome = self[:email].split("@")[0]    
-    nome = nome.sub!("."," ") if nome.include? "."
-    nome = nome.titleize
+    if self[:email].present?
+      nome = self[:email].split("@")[0]    
+      nome = nome.sub!("."," ") if nome.include? "."
+      nome = nome.titleize
+    else
+      self[:nome]
+    end
   end  
 end
