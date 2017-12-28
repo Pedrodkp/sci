@@ -23,13 +23,13 @@ Com usuário ecomex (senha com infra@ecomex.com.br) logar na maquina XORN hosped
 2) Matar todos os processos usando (kill -9 xxx) que encontrar com:
 - ps aux | grep rails
 3) Fazer backup da pasta SCI:
-- mv sci sci_bkp
+- mv /sci /sci_bkp
 4) Copie projeto do GITHUB:
 - git clone https://github.com/Pedrodkp/sci.git   
 5) Apague pastas e arquivos de imagens e configurações do deploy:
 - rm -rf /sci/public/assets
 - rm /sci/config/secrets.yml
-6)Copie pastas e arquivos de imagens e configurações do backup:
+6) Copie pastas e arquivos de imagens e configurações do backup:
 - cp -r /sci_bkp/public/assets /sci/public
 - cp -r /sci_bkp/public/ckeditor_assets /sci/public
 - cp /sci_bkp/config/secrets.yml /sci/config
@@ -63,3 +63,4 @@ Porém caso possua alguma sugestão ou precise relatar um bug pode faze-lo por c
 A Fazer:
 - Carregar as telas do sistema como taxonomias.
 - Icone para o sistema.
+- Tratar o problema com endereço externo ser diferente do interno.
