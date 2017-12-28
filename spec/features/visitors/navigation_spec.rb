@@ -10,7 +10,7 @@ feature 'Navigation links', :devise do
   #   Then I see "home," "sign in," and "sign up"
   scenario 'view navigation links' do
     visit root_path
-    expect(page).to have_content 'Início'
+    expect(page).to have_content 'SCI'
     expect(page).to have_content 'Entrar'
     expect(page).to have_content 'Me cadastrar'
   end

@@ -56,6 +56,10 @@ https://drive.google.com/drive/folders/0B5_vgGrDUC10VHVVMzh6MHlCR3c?usp=sharing
 TO-DO
 -------------
 
-Este projeto foi interrompido com 50% de conclusão e entregue como está, não haverão melhorias até segunda ordem.
+Este projeto foi interrompido com 50% de conclusão e entregue como está a pedido do cliente, e não haveriam melhorias até segunda ordem.
 
-Bugs podem ser tratados por chamado com infra@ecomex.com.br
+Porém caso possua alguma sugestão ou precise relatar um bug pode faze-lo por chamado com infra@ecomex.com.br
+
+A Fazer:
+- Carregar as telas do sistema como taxonomias.
+- Icone para o sistema.
